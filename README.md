@@ -2,10 +2,6 @@
 
 Twitterrific 6 has support to custom themes by creating new plist files inside its iCloud Drive folder. This Theme Editor helps creating these files and modifying them.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
 - [Twitterrific 6](https://twitterrific.com/ios)
@@ -23,7 +19,7 @@ Just copy the line above, paste into Pythonista interactive prompt (aka Console)
 
 ### Running
 
-In order to launch the Theme Editor, you have to navigate to the "ThemeEditor-master" folder and run the "mainView.py" script.
+In order to launch the Theme Editor, you have to navigate to the **ThemeEditor-master** folder and run the **mainView.py** script.
 I recommend running Pythonista in a Split View side by side with Twitterrific to be able to see changes happening in real time.
 
 ### Usage
@@ -31,7 +27,7 @@ I recommend running Pythonista in a Split View side by side with Twitterrific to
 - Create new themes by pressing the + button.
 - Delete themes with swiping to delete gesture.
 - *darkWindowStyle* and *thinLineStyle* have no colors. Use the toggle to set its value.
-- Set the color by using the sliders or by inserting the HEX color code in the textfield, then use the ***Set Color*** button to commit changes.
+- Set the color by using the sliders or by inserting the HEX color code in the textfield, then use the **Set Color** button to commit changes.
 
 ## Authors
 
