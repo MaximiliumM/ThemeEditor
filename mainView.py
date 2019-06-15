@@ -119,7 +119,7 @@ class ThemeEditorView(ui.View):
 		
 		
 	def setup(self, theme):
-		self.dir = '/private/var/mobile/Library/Mobile Documents/iCloud~com~iconfactory~Blackbird/Documents/Themes/%s' % theme
+		self.dir = TWITTERRIFIC_PATH % theme
 	
 		with open(self.dir, 'rb') as f:
 			self.data = plistlib.readPlist(f)
