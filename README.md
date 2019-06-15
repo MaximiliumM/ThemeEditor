@@ -20,7 +20,7 @@ Just copy the line above, paste into Pythonista interactive prompt (aka Console)
 
 ### STEP 2
 
-Open Pythonista's side bar, tap **Open...** right below *EXTERNAL FILES* and look for Twitterrific's folder. Tap **Select** (if you can't find the Select button, just tap Cancel and open this window again), tap Twitterrific's folder (make sure you're selecting the whole folder and not just the Themes folder) and then tap **Open**. Now there should be a Themes folder below *EXTERNAL FILES* in Pythonista. If there is, you're good to go.
+Open Pythonista's side bar, tap **Open...** right below *EXTERNAL FILES*, find Twitterrific's folder and open it. Tap **Select** (if you can't find the Select button, just tap Cancel and open this window again), tap Themes folder and then tap **Open**. Now there should be a Themes folder below *EXTERNAL FILES* in Pythonista. If there is, you're good to go.
 
 ## Running
 
