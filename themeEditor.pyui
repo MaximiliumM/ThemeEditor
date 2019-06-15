@@ -3,6 +3,77 @@
     "nodes" : [
       {
         "nodes" : [
+          {
+            "nodes" : [
+
+            ],
+            "frame" : "{{0, 0}, {484, 34}}",
+            "class" : "Slider",
+            "attributes" : {
+              "flex" : "W",
+              "action" : "",
+              "continuous" : true,
+              "frame" : "{{20, 103}, {200, 34}}",
+              "tint_color" : "RGBA(1.000000,0.232558,0.232558,1.000000)",
+              "uuid" : "83B4C0BD-D5C7-44A9-9EAA-4FFA1957A30A",
+              "class" : "Slider",
+              "value" : 0.5,
+              "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
+              "name" : "slider1"
+            },
+            "selected" : true
+          },
+          {
+            "nodes" : [
+
+            ],
+            "frame" : "{{0, 42}, {484, 34}}",
+            "class" : "Slider",
+            "attributes" : {
+              "flex" : "W",
+              "action" : "",
+              "continuous" : true,
+              "frame" : "{{20, 103}, {200, 34}}",
+              "tint_color" : "RGBA(0.023256,1.000000,0.023256,1.000000)",
+              "uuid" : "AB6F1865-26F8-4264-93B8-B7AE1833533C",
+              "class" : "Slider",
+              "value" : 0.5,
+              "name" : "slider2"
+            },
+            "selected" : false
+          },
+          {
+            "nodes" : [
+
+            ],
+            "frame" : "{{0, 84}, {484, 34}}",
+            "class" : "Slider",
+            "attributes" : {
+              "action" : "",
+              "flex" : "W",
+              "continuous" : true,
+              "frame" : "{{20, 103}, {200, 34}}",
+              "uuid" : "C299AC92-E7F9-4F10-9653-C9743A960393",
+              "class" : "Slider",
+              "value" : 0.5,
+              "name" : "slider3"
+            },
+            "selected" : false
+          }
+        ],
+        "frame" : "{{6, 54}, {484, 163}}",
+        "class" : "View",
+        "attributes" : {
+          "flex" : "W",
+          "frame" : "{{195, 165}, {100, 100}}",
+          "class" : "View",
+          "name" : "groupView",
+          "uuid" : "F61F917F-ADAE-47C8-BE5D-B1DD9B959C0D"
+        },
+        "selected" : true
+      },
+      {
+        "nodes" : [
 
         ],
         "frame" : "{{6, 6}, {100, 40}}",
@@ -16,62 +87,6 @@
           "uuid" : "BEC2585D-B8B0-4684-89D3-D3C78AC97CDA",
           "corner_radius" : 6,
           "name" : "view1"
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{6, 54}, {478, 34}}",
-        "class" : "Slider",
-        "attributes" : {
-          "flex" : "W",
-          "action" : "",
-          "continuous" : true,
-          "frame" : "{{20, 103}, {200, 34}}",
-          "tint_color" : "RGBA(1.000000,0.232558,0.232558,1.000000)",
-          "uuid" : "83B4C0BD-D5C7-44A9-9EAA-4FFA1957A30A",
-          "class" : "Slider",
-          "value" : 0.5,
-          "name" : "slider1"
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{6, 96}, {478, 34}}",
-        "class" : "Slider",
-        "attributes" : {
-          "flex" : "W",
-          "action" : "",
-          "continuous" : true,
-          "frame" : "{{20, 103}, {200, 34}}",
-          "tint_color" : "RGBA(0.023256,1.000000,0.023256,1.000000)",
-          "uuid" : "AB6F1865-26F8-4264-93B8-B7AE1833533C",
-          "class" : "Slider",
-          "value" : 0.5,
-          "name" : "slider2"
-        },
-        "selected" : false
-      },
-      {
-        "nodes" : [
-
-        ],
-        "frame" : "{{6, 138}, {478, 34}}",
-        "class" : "Slider",
-        "attributes" : {
-          "action" : "",
-          "flex" : "W",
-          "continuous" : true,
-          "frame" : "{{20, 103}, {200, 34}}",
-          "uuid" : "C299AC92-E7F9-4F10-9653-C9743A960393",
-          "class" : "Slider",
-          "value" : 0.5,
-          "name" : "slider3"
         },
         "selected" : false
       },
@@ -98,20 +113,20 @@
         "nodes" : [
 
         ],
-        "frame" : "{{0, 180}, {490, 250}}",
+        "frame" : "{{0, 217}, {490, 213}}",
         "class" : "TableView",
         "attributes" : {
           "flex" : "WH",
           "data_source_items" : "Row 1\nRow 2\nRow 3",
-          "data_source_delete_enabled" : false,
-          "frame" : "{{20, 20}, {200, 200}}",
-          "uuid" : "D0B3829E-A5CB-40D2-8679-6E4A5BE268B4",
-          "background_color" : "RGBA(1.0, 1.0, 1.0, 1.0)",
-          "data_source_number_of_lines" : 1,
-          "data_source_font_size" : 18,
-          "class" : "TableView",
           "name" : "tableview1",
-          "row_height" : 44
+          "frame" : "{{20, 20}, {200, 200}}",
+          "data_source_number_of_lines" : 1,
+          "class" : "TableView",
+          "uuid" : "D0B3829E-A5CB-40D2-8679-6E4A5BE268B4",
+          "data_source_delete_enabled" : false,
+          "data_source_font_size" : 18,
+          "row_height" : 44,
+          "background_color" : "RGBA(1.0, 1.0, 1.0, 1.0)"
         },
         "selected" : false
       },
@@ -150,17 +165,17 @@
           "name" : "textfield1",
           "font_name" : "<System>"
         },
-        "selected" : true
+        "selected" : false
       }
     ],
     "frame" : "{{0, 0}, {490, 430}}",
     "class" : "View",
     "attributes" : {
-      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
+      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
       "enabled" : true,
+      "border_color" : "RGBA(0.000000,0.000000,0.000000,1.000000)",
       "background_color" : "RGBA(1.000000,1.000000,1.000000,1.000000)",
       "custom_class" : "ThemeEditorView",
-      "tint_color" : "RGBA(0.000000,0.478000,1.000000,1.000000)",
       "flex" : ""
     },
     "selected" : false

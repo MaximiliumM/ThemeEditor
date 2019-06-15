@@ -8,6 +8,7 @@ import objc_util
 import ImageColor
 import plistlib
 import dialogs
+from colorPicker import ColorPicker
 
 TWITTERRIFIC_PATH = '/private/var/mobile/Library/Mobile Documents/iCloud~com~iconfactory~Blackbird/Documents/Themes/%s'
 
@@ -95,11 +96,11 @@ class ThemeEditorView(ui.View):
 		g = v['slider2'].value
 		b = v['slider3'].value
 		# Create the new color from the slider values:
-		v['view1'].background_color = (r, g, b)
-		v['textfield1'].text = '#%.02X%.02X%.02X' % (int(r*255), int(g*255), int(b*255))
+		v.superview['view1'].background_color = (r, g, b)
+		v.superview['textfield1'].text = '#%.02X%.02X%.02X' % (int(r*255), int(g*255), int(b*255))
 		
 	def cell_tapped(self, sender):
-		v = self
+		v = self.groupView
 		self.switch.hidden = True
 		self.setColorButton.enabled = True
 		
@@ -128,7 +129,7 @@ class ThemeEditorView(ui.View):
 		dataSource.action = self.cell_tapped
 		
 		v = self
-		
+				
 		self.tableView = v['tableview1']
 		self.tableView.data_source = dataSource
 		self.tableView.delegate = dataSource
@@ -140,13 +141,19 @@ class ThemeEditorView(ui.View):
 		self.setColorButton = v['button1']
 		self.setColorButton.action = self.set_color
 		
-		self.slider1 = v['slider1']
+		self.groupView = v['groupView']
+		
+		self.pickerView = ColorPicker(frame=(self.groupView.frame))
+		self.pickerView.autoresizing = 'W'
+		self.groupView.add_subview(self.pickerView)
+		
+		self.slider1 = self.groupView['slider1']
 		self.slider1.action = self.slider_action
 		
-		self.slider2 = v['slider2']
+		self.slider2 = self.groupView['slider2']
 		self.slider2.action = self.slider_action
 		
-		self.slider3 = v['slider3']
+		self.slider3 = self.groupView['slider3']
 		self.slider3.action = self.slider_action
 		
 		textField = v['textfield1']
