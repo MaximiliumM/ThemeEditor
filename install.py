@@ -9,13 +9,6 @@ def extract_git_id(git):
                  '((/tree|/blob)/(?P<branch>[\w-]*))?'), git)
 #    print m.groupdict()
     return m
-    
-def git_download_from_args(args):
-    if len(args) == 2:
-        url = args[1]
-    else:
-        url = clipboard.get()
-    git_download(url)
 
 def dlProgress(filename, count, blockSize, totalSize):
     if count*blockSize > totalSize:
@@ -48,5 +41,5 @@ def git_download(url):
     else:
         print('could not determine repo url from clipboard or argv')
         
-if __name__=='__main__':
-    git_download_from_args('https://github.com/MaximiliumM/ThemeEditor')
+
+git_download('https://github.com/MaximiliumM/ThemeEditor')
