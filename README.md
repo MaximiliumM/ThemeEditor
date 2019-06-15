@@ -21,6 +21,18 @@ import requests as r; exec(r.get('https://raw.githubusercontent.com/MaximiliumM/
 
 Just copy the line above, paste into Pythonista interactive prompt (aka Console) and execute.
 
+### Running
+
+In order to launch the Theme Editor, you have to navigate to the "ThemeEditor-master" folder and run the "mainView.py" script.
+I recommend running Pythonista in a Split View side by side with Twitterrific to be able to see changes happening in real time.
+
+### Usage
+
+- Create new themes by pressing the + button.
+- Delete themes with swiping to delete gesture.
+- *darkWindowStyle* and *thinLineStyle* have no colors. Use the toggle to set its value.
+- Set the color by using the sliders or by inserting the HEX color code in the textfield, then use the ***Set Color*** button to commit changes.
+
 ## Authors
 
 * **Felipe Manoeli** - [MaximiliumM](https://www.twitter.com/MaximiliumM)
