@@ -5,67 +5,77 @@ class ColorPicker(ui.View):
 	def __init__(self, *args,**kwargs):
 		ui.View.__init__(self,*args,**kwargs)
 		self.history=[]  #future...keep track of recent colors
-		self.current=(.3,0.2,0.5) 
+		self.current=(0.3,0.2,0.5) 
+		self.rgb=colorsys.hsv_to_rgb(self.current[0], self.current[1], self.current[2])
 		self.N=16
-		self.Nb=32
+		self.Nb=18
+		
+	def set_rgb(self, r, g, b):
+		self.current = colorsys.rgb_to_hsv(r, g, b)
+		self.set_needs_display()
+		
 	def draw(self):
+			self.y = 0
 			square_size=max(self.width,self.height)
 			N=self.N
 			Nb=self.Nb
-			dx=square_size*1.0/(N+2)
+			dx=square_size*1.0/(N+3)
 			dxb=N*dx/Nb
 			h,s,v=self.current
 			i0,j0,k0=(round(c*N) for c in self.current)
 	
 			k0=round(self.current[2]*Nb)
 			#draw H/S grid
-			for i in range(0,N):
+			for i in range(0,N+1):
 				for j in range(0,N):			
 					ui.set_color(colorsys.hsv_to_rgb(i*1.0/N,j*1.0/N,v))
 					ui.set_blend_mode(ui.BLEND_NORMAL)
-					ui.fill_rect(round(i*dx),round(j*dx),round(dx),round(dx))
+					ui.fill_rect(round(i*dx),round(j*self.height/Nb),round(dx),round(self.height+1/Nb))
 	
 			#draw V slider
 			for k in range(0,Nb):
 				ui.set_color(colorsys.hsv_to_rgb(h,s,k*1./Nb))
 				ui.set_blend_mode(ui.BLEND_NORMAL)
-				ui.fill_rect(round((N+1)*dx),round(k*dxb),round(dx),round(dxb+0.5))
+				ui.fill_rect(round((N+1.5)*dx),round(k*self.height/Nb),round(dx),round(self.height/Nb+0.5))
 				
 			#highlight selection
 			if all([c>=0 for c in self.current]):
-				ui.set_color(colorsys.hsv_to_rgb(h,s,1-0.5*(1-v)))
-				p=ui.Path.rect(i0*dx,j0*dx,dx,dx)
+				# h,s selection
+				ui.set_color(colorsys.hsv_to_rgb(h-0.1,s,1-0.5*v))
+				p=ui.Path.rect(i0*dx,j0*(self.height+10)/Nb,dx,self.height/Nb)
 				p.line_width=4
 				p.stroke()
 				
-				ui.set_color(colorsys.hsv_to_rgb(h,s,1-0.5*(1-v)))
-				p=ui.Path.rect((N+1)*dx,k0*dxb,dx,dxb)
+				# v selection
+				ui.set_color(colorsys.hsv_to_rgb(h,s,1-0.5*(0.2+v)))
+				p=ui.Path.rect((N+1.5)*dx,k0*(self.height-10)/Nb,dx,self.height/Nb)
 				p.line_width=4
 				p.stroke()
-				#preview
-				ui.set_color(colorsys.hsv_to_rgb(h,s,v))
-				ui.fill_rect(0,(N+1)*dx,6*dx,dx)
-				r,g,b=colorsys.hsv_to_rgb(h,s,v)
+
+			self.rgb=colorsys.hsv_to_rgb(self.current[0], self.current[1], self.current[2])			
+			r, g, b = self.rgb
+
+			self.superview.superview.set_colorView(r, g, b)
 				
-				clip=lambda x:min(max(x,0),1)
-				rp,gp,bp=colorsys.hsv_to_rgb(1-h,1,clip((0.5-v)*100))
-				ui.draw_string(			('{:02x}'*3).format(int(r*255),int(g*255),int(b*255)), (0,(N+1)*dx,6*dx,dx),alignment=ui.ALIGN_CENTER,color=(rp,gp,bp))
+
 	def touch_began(self,touch):
 		self.touch_moved(touch)
 	def touch_moved(self,touch):
 			#set color
 			#  self dx=size/(N+2)
-			square_size=min(self.width,self.height)
+			square_size=max(self.width,self.height)
 			N=self.N
 			Nb=self.Nb
 			dx=square_size*1.0/(N+2)
-			dxb=N*dx*1.0/Nb
+			dxb=N*dx*1.0/self.height+1
 			h,s,v=self.current
-			if touch.location[0]>=dx*(N+1) and touch.location[1]<=dxb*Nb:
-				v=round(touch.location[1]/dxb-0.5)/Nb
-			elif touch.location[1]<=dx*N and touch.location[0]<=dx*N:
-				h=round(touch.location[0]/dx-0.5)/N
-				s=round(touch.location[1]/dx-0.5)/N
+			if touch.location[0]>=dx*(N+0.5) and touch.location[1]<=193:
+				v=round(touch.location[1]/10)/Nb
+			elif touch.location[1]<=self.height and touch.location[0]<=dx*(N+1):
+				# Horizontal Position Relative to Finger
+				h=round(touch.location[0]/(dx+0.1))/N
+				# Vertical Position Relative to Finger
+				s=round(touch.location[1]/10)/N 
 			clip=lambda x:min(max(x,0),1)
 			self.current=(clip(h),clip(s),clip(v))
 			self.set_needs_display()

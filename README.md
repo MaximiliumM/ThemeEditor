@@ -2,6 +2,10 @@
 
 Twitterrific 6 has support to custom themes by creating new plist files inside its iCloud Drive folder. This Theme Editor helps creating these files and modifying them.
 
+## Getting Started
+
+To get started creating custom themes, I recommend reading through [this awesome guide](https://www.ringgit.me/2019/06/how-to-change-twitterrific-v6-theme.html?m=1) that [@longfy](https://www.twitter.com/longfy) created to understand how Twitterrific's coloring system works.
+
 ## Prerequisites
 
 - [Twitterrific 6](https://twitterrific.com/ios)
@@ -32,7 +36,7 @@ I recommend running Pythonista in a Split View side by side with Twitterrific to
 - Create new themes by pressing the + button.
 - Delete themes with swiping to delete gesture.
 - *darkWindowStyle* and *thinLineStyle* have no colors. Use the toggle to set its value.
-- Set the color by using the sliders or by inserting the HEX color code in the textfield, then use the **Set Color** button to commit changes.
+- Three different inputs to set the color: RGB sliders, HSV color picker or HEX color code; Tap the **Set Color** button to commit changes.
 
 ## Authors
 
@@ -42,3 +46,5 @@ I recommend running Pythonista in a Split View side by side with Twitterrific to
 
 * Hat tip to anyone whose code was used
 * [@BigZaphod](https://www.twitter.com/BigZaphod) - Thanks :D
+* Thanks [jsbain](https://github.com/jsbain) for the awesome color picker!
+* [@longfy](https://www.twitter.com/longfy) - Thanks!
