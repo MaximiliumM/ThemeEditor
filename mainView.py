@@ -8,6 +8,7 @@ import objc_util
 import ImageColor
 import plistlib
 import dialogs
+from colorPicker import ColorPicker
 
 TWITTERRIFIC_PATH = '/private/var/mobile/Library/Mobile Documents/iCloud~com~iconfactory~Blackbird/Documents/Themes/%s'
 
@@ -32,8 +33,6 @@ class MyTextFieldDelegate (object):
 		textfield.end_editing()
 		return True
 	def textfield_should_change(self, textfield, range, replacement):
-		print(range)
-		print(replacement)
 		isHexCode = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', replacement)
 		
 		if (range[0] == 0 and isHexCode):
@@ -57,23 +56,33 @@ class MyTextFieldDelegate (object):
 			rgb = ImageColor.getrgb(textfield.text)
 			r, g, b = rgb
 			
-			v = textfield.superview
+			v = textfield.superview['groupView']
 			
 			v['slider1'].value = float(r) / 255
 			v['slider2'].value = float(g) / 255
 			v['slider3'].value = float(b) / 255
 			
-			v.slider_action(v['slider1'])
+			v.superview.slider_action(v['slider1'])
 			
 		pass
 
 class ThemeEditorView(ui.View):
 	def save_changes(self):
 		plistlib.writePlist(self.data, self.dir)
+		
+	def set_colorView(self, r, g, b):
+		v = self
+		v['view1'].background_color = (r, g, b)
+		
+		self.slider1.value = r
+		self.slider2.value = g
+		self.slider3.value = b
+				
+		self.textField.text = '#%.02X%.02X%.02X' % (int(r*255), int(g*255), int(b*255))
 			
 	def set_color(self, sender):
 		# Get the root view:
-		v = sender.superview
+		v = sender.superview.groupView
 		# Get the sliders:
 		r = int(255 * v['slider1'].value)
 		g = int(255 * v['slider2'].value)
@@ -94,12 +103,13 @@ class ThemeEditorView(ui.View):
 		r = v['slider1'].value
 		g = v['slider2'].value
 		b = v['slider3'].value
-		# Create the new color from the slider values:
-		v['view1'].background_color = (r, g, b)
-		v['textfield1'].text = '#%.02X%.02X%.02X' % (int(r*255), int(g*255), int(b*255))
+		
+		self.pickerView.set_rgb(r, g, b)
+		self.set_colorView(r, g, b)
+		
 		
 	def cell_tapped(self, sender):
-		v = self
+		v = self.groupView
 		self.switch.hidden = True
 		self.setColorButton.enabled = True
 		
@@ -111,11 +121,21 @@ class ThemeEditorView(ui.View):
 			self.switch.value = attrValue
 			self.setColorButton.enabled = False
 		else:
-			r, g, b = attrValue.split(':')
-			v['slider1'].value = float(r) / 255
-			v['slider2'].value = float(g) / 255
-			v['slider3'].value = float(b) / 255
-			self.slider_action(v['slider1'])	
+			r, g, b = [float(x) / 255 for x in attrValue.split(':')]
+			self.pickerView.set_rgb(r, g, b)
+			self.set_colorView(r, g, b)
+			
+	def set_color_mode(self, sender):
+		if sender.selected_index == 0:
+			self.pickerView.hidden = True
+			self.groupView['slider1'].hidden = False
+			self.groupView['slider2'].hidden = False
+			self.groupView['slider3'].hidden = False
+		else:
+			self.pickerView.hidden = False
+			self.groupView['slider1'].hidden = True
+			self.groupView['slider2'].hidden = True
+			self.groupView['slider3'].hidden = True
 		
 		
 	def setup(self, theme):
@@ -126,9 +146,10 @@ class ThemeEditorView(ui.View):
 		
 		dataSource = ui.ListDataSource(sorted(self.data.keys()))
 		dataSource.action = self.cell_tapped
+		dataSource.delete_enabled = False
 		
 		v = self
-		
+				
 		self.tableView = v['tableview1']
 		self.tableView.data_source = dataSource
 		self.tableView.delegate = dataSource
@@ -140,17 +161,28 @@ class ThemeEditorView(ui.View):
 		self.setColorButton = v['button1']
 		self.setColorButton.action = self.set_color
 		
-		self.slider1 = v['slider1']
+		self.groupView = v['groupView']
+		
+		self.pickerView = ColorPicker(frame=(self.groupView.frame))
+		self.pickerView.autoresizing = 'WH'
+		self.groupView.add_subview(self.pickerView)
+		
+		self.slider1 = self.groupView['slider1']
 		self.slider1.action = self.slider_action
 		
-		self.slider2 = v['slider2']
+		self.slider2 = self.groupView['slider2']
 		self.slider2.action = self.slider_action
 		
-		self.slider3 = v['slider3']
+		self.slider3 = self.groupView['slider3']
 		self.slider3.action = self.slider_action
 		
-		textField = v['textfield1']
-		textField.delegate = MyTextFieldDelegate()
+		self.colorModeSegmentedControl = v['segmentedcontrol1']
+		self.colorModeSegmentedControl.action = self.set_color_mode
+		self.colorModeSegmentedControl.selected_index = 1
+		self.set_color_mode(self.colorModeSegmentedControl)
+		
+		self.textField = v['textfield1']
+		self.textField.delegate = MyTextFieldDelegate()
 		
 		self.tableView.data_source.tableview_did_select(self.tableView, 0, 0)
 		
