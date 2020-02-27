@@ -10,13 +10,13 @@
         "attributes" : {
           "action" : "change_folder",
           "flex" : "WLR",
-          "segments" : "Day|Night",
+          "segments" : "Light|Dark",
           "frame" : "{{103, 208}, {120, 29}}",
           "uuid" : "6924421E-8868-462F-A2A3-B3DD37718A7E",
           "class" : "SegmentedControl",
           "name" : "segmentedcontrol1"
         },
-        "selected" : false
+        "selected" : true
       },
       {
         "nodes" : [
@@ -27,15 +27,15 @@
         "attributes" : {
           "flex" : "WH",
           "data_source_items" : "Row 1\nRow 2\nRow 3",
-          "row_height" : 44,
+          "data_source_font_size" : 18,
           "frame" : "{{63, 122}, {200, 200}}",
           "uuid" : "789079D8-1F4F-4DEC-A0F3-A835D2A2C3C9",
           "data_source_number_of_lines" : 1,
           "class" : "TableView",
           "background_color" : "RGBA(1.0, 1.0, 1.0, 1.0)",
           "data_source_delete_enabled" : true,
-          "data_source_font_size" : 18,
-          "name" : "tableview1"
+          "name" : "tableview1",
+          "row_height" : 44
         },
         "selected" : false
       },
@@ -47,16 +47,16 @@
         "class" : "Button",
         "attributes" : {
           "action" : "new_theme",
-          "image_name" : "iob:plus_circled_24",
           "flex" : "L",
+          "image_name" : "iob:plus_circled_24",
           "frame" : "{{123, 206}, {80, 32}}",
           "title" : "",
           "uuid" : "D4B4D1A9-9FCB-428F-9487-8043700E682F",
           "class" : "Button",
-          "name" : "button1",
-          "font_size" : 15
+          "font_size" : 15,
+          "name" : "button1"
         },
-        "selected" : true
+        "selected" : false
       }
     ],
     "frame" : "{{0, 0}, {326, 444}}",

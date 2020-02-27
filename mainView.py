@@ -245,6 +245,6 @@ nav = ui.NavigationView(v)
 nav.name = "My Themes"
 nav.title_color = '#636363'
 
-nav.present()
+nav.present("fullscreen")
 
 
